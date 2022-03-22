@@ -14,18 +14,7 @@ class LaravelJobStatusServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-
-        $this->mergeConfigFrom(__DIR__ . '/../config/job-status.php', 'job-status');
-
-        $this->publishes([
-            __DIR__ . '/../database/migrations/' => database_path('migrations'),
-        ], 'migrations');
-
-        $this->publishes([
-            __DIR__ . '/../config/' => config_path(),
-        ], 'config');
-
+        $this->registerPublishables();
         $this->bootListeners();
     }
 
@@ -47,5 +36,18 @@ class LaravelJobStatusServiceProvider extends ServiceProvider
         app(QueueManager::class)->exceptionOccurred(function (JobExceptionOccurred $event) use ($eventManager) {
             $eventManager->exceptionOccurred($event);
         });
+    }
+
+    protected function registerPublishables(): void
+    {
+        if (!class_exists('CreateMediaTable')) {
+            $this->publishes([
+                __DIR__ . '/../database/migrations/create_job_statuses_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_job_statuses.php'),
+            ], 'migrations');
+        }
+
+        $this->publishes([
+            __DIR__ . '/../config/job-status.php' => config_path('job-status.php'),
+        ], 'config');
     }
 }
