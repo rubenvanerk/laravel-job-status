@@ -15,12 +15,12 @@
     "queue"
   ],
   "require": {
-    "php": ">=7.1",
-    "illuminate/contracts": ">=5.5",
-    "illuminate/database": ">=5.5",
-    "illuminate/queue": ">=5.5",
-    "illuminate/support": ">=5.5",
-    "nesbot/carbon": ">=1.21",
+    "php": ">=8.0",
+    "illuminate/contracts": ">=8.0",
+    "illuminate/database": ">=8.0",
+    "illuminate/queue": ">=8.0",
+    "illuminate/support": ">=8.0",
+    "nesbot/carbon": ">=2.0",
     "ext-json": "*"
   },
   "require-dev": {
