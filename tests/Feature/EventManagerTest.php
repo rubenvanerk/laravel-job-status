@@ -5,7 +5,6 @@ namespace Imtigger\LaravelJobStatus\Tests\Feature;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Support\Facades\Artisan;
 use Imtigger\LaravelJobStatus\EventManagers\DefaultEventManager;
-use Imtigger\LaravelJobStatus\EventManagers\LegacyEventManager;
 use Imtigger\LaravelJobStatus\JobStatus;
 use Imtigger\LaravelJobStatus\Tests\Data\TestJob;
 use Imtigger\LaravelJobStatus\Tests\Data\TestJobWithException;
@@ -40,7 +39,6 @@ class EventManagerTest extends TestCase
     {
         return [
             [DefaultEventManager::class, JobStatus::STATUS_FAILED],
-            [LegacyEventManager::class, JobStatus::STATUS_RETRYING],
         ];
     }
 }
