@@ -40,6 +40,8 @@ class LaravelJobStatusServiceProvider extends ServiceProvider
 
     protected function registerPublishables(): void
     {
+        $this->mergeConfigFrom(__DIR__ . '/../config/job-status.php', 'job-status');
+
         if (!class_exists('CreateMediaTable')) {
             $this->publishes([
                 __DIR__ . '/../database/migrations/create_job_statuses_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_job_statuses.php'),
